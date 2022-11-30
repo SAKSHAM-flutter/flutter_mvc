@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:interview_task/ui/screens/home/home_viewmodel.dart';
 import 'package:interview_task/ui/utils/base_class/base_screen.dart';
 import 'package:interview_task/ui/utils/base_class/view_model.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "homeScreen";
@@ -24,19 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenBase<HomeViewModel>(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Center(
-            child: ElevatedButton(
-              onPressed: () {
-                context.read<HomeViewModel>().getPrices();
-              },
-              child: Text("Api Call"),
-            ),
-          ),
-        ),
-      ),
+    return const ScreenBase<HomeViewModel>(
+      child: Scaffold(),
     );
   }
 }

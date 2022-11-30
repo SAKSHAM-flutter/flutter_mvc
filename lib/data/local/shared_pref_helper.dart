@@ -11,7 +11,7 @@ class Prefs {
     prefs = await SharedPreferences.getInstance();
   }
 
-  static final localData = SharedPrefValue<int>('local_data', prefs);
+  static final localData = SharedPrefValue<String>('local_data', prefs);
   static final email = SharedPrefValue<String>('_email', prefs);
   static final password = SharedPrefValue<String>('_password', prefs);
   static final remember = SharedPrefValue<bool>('_is_remember', prefs);

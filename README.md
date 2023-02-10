@@ -1,6 +1,6 @@
-# interview_task
+# Provider Pattern
 
-Project For Interview Task Submission
+Repo for provider pattern in flutter
 
 #SDK used Flutter 3.3.1 • channel stable Dart 2.18.0 • DevTools 2.15.0
 

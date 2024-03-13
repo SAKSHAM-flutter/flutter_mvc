@@ -7,7 +7,7 @@ import '../remote/model/default_serializers.dart';
 ///Parses a jsonEncoded string to an object of type ResponseDto<T>.
 ///T can be any built_value class with serializer defined with [Serializers]
 ResponseDto<T?> parseResponse<T>(dynamic jsonString) {
-  final specifiedType = FullType(T);
+  final specifiedType = FullType(ResponseDto, [FullType(T)]);
   final serializersWithBuilder = (serializers.toBuilder()
         ..addBuilderFactory(specifiedType, ResponseDtoBuilder<T>.new))
       .build();

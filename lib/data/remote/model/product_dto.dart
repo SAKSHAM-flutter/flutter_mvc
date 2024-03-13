@@ -8,7 +8,7 @@ abstract class ProductDto implements Built<ProductDto, ProductDtoBuilder> {
   ProductDto._();
 
   @BuiltValueField(wireName: 'id')
-  String get id;
+  int get id;
 
   @BuiltValueField(wireName: 'title')
   String get title;

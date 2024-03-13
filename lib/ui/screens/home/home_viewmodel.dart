@@ -4,14 +4,14 @@ import 'package:mvc_flutter/ui/utils/base_class/view_model.dart';
 
 class HomeViewModel extends ViewModel {
   bool _apiView = false;
-  List<ProductDto> _products = [];
+  List<ProductDto>? _products;
   int _counter = 0;
 
   int get counter => _counter;
 
   bool get apiView => _apiView;
 
-  List<ProductDto> get products => _products;
+  List<ProductDto>? get products => _products;
 
   set counter(int value) {
     _counter = value;
@@ -21,13 +21,13 @@ class HomeViewModel extends ViewModel {
   set apiView(bool value) {
     if (value != apiView) {
       counter = 0;
-      products = [];
+      products = null;
     }
     _apiView = value;
     notifyListeners();
   }
 
-  set products(List<ProductDto> value) {
+  set products(List<ProductDto>? value) {
     _products = value;
     notifyListeners();
   }
@@ -49,8 +49,21 @@ class HomeViewModel extends ViewModel {
     callApi(() async {
       final response = await HomeRepo.getProducts();
       if (response.isSuccessful) {
-        products = response.data?.toList() ?? [];
+        products = response.data?.products.toList() ?? [];
       } else {
+        onError?.call(response.message);
+      }
+    });
+  }
+
+  void noProduct() {
+    if (isLoading) return;
+    callApi(() async {
+      final response = await HomeRepo.noProduct();
+      if (response.isSuccessful) {
+        products = [];
+      } else {
+        products = [];
         onError?.call(response.message);
       }
     });

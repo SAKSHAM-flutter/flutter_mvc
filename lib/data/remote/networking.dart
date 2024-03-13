@@ -25,8 +25,8 @@ dynamic _callGetApi(
   final uri = Uri(
     scheme: 'https',
     host: baseUrl ?? Endpoints.authority,
-    path: path,
-    // queryParameters: queryParams,
+    path: '${Endpoints.path}/$path',
+    queryParameters: queryParams.isEmpty ? queryParams : null,
   );
   log(uri.toString(), name: LogTags.apiCall);
   //calling the REST API
@@ -45,8 +45,7 @@ dynamic _callPostApi(
   Uri uri = Uri(
     scheme: 'https',
     host: baseUrl ?? Endpoints.authority,
-    path: path,
-    // queryParameters: queryParams,
+    path: '${Endpoints.path}/$path',
   );
 
   http.MultipartRequest request = http.MultipartRequest("POST", uri);
@@ -60,6 +59,15 @@ dynamic _callPostApi(
   log("Api Call Completed------> ${jsonDecode(responseBody)}",
       name: LogTags.apiCall);
   return jsonDecode(responseBody);
+}
+
+Future<ResponseDto<T?>> httpGet<T>(
+  final String path,
+  final Map<String, String> queryParams, {
+  final String? baseUrl,
+}) async {
+  final response = await _callGetApi(path, queryParams, baseUrl);
+  return parseResponse<T>(response);
 }
 
 Future<ResponseDto<T?>> httpPost<T>(

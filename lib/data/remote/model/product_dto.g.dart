@@ -19,7 +19,7 @@ class _$ProductDtoSerializer implements StructuredSerializer<ProductDto> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       'id',
-      serializers.serialize(object.id, specifiedType: const FullType(String)),
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
@@ -51,7 +51,7 @@ class _$ProductDtoSerializer implements StructuredSerializer<ProductDto> {
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'title':
           result.title = serializers.deserialize(value,
@@ -80,7 +80,7 @@ class _$ProductDtoSerializer implements StructuredSerializer<ProductDto> {
 
 class _$ProductDto extends ProductDto {
   @override
-  final String id;
+  final int id;
   @override
   final String title;
   @override
@@ -154,9 +154,9 @@ class _$ProductDto extends ProductDto {
 class ProductDtoBuilder implements Builder<ProductDto, ProductDtoBuilder> {
   _$ProductDto? _$v;
 
-  String? _id;
-  String? get id => _$this._id;
-  set id(String? id) => _$this._id = id;
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
 
   String? _title;
   String? get title => _$this._title;

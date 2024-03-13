@@ -8,7 +8,12 @@ part of 'default_serializers.dart';
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ProductDto.serializer)
+      ..add(ProductResponseDto.serializer)
       ..add(ResponseDto.serializer)
+      ..add(UnitDto.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(ProductDto)]),
+          () => new ListBuilder<ProductDto>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>()))

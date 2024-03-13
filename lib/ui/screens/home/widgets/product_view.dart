@@ -12,20 +12,50 @@ class ProductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<HomeViewModel, Tuple2<List<ProductDto>, bool>>(
+    return Selector<HomeViewModel, Tuple2<List<ProductDto>?, bool>>(
       selector: (ctx, provider) =>
           Tuple2(provider.products, provider.isLoading),
       builder: (ctx, items, child) {
         if (items.item2) return const SizedBox.shrink();
-        if (items.item1.isEmpty) {
-          return CommonButton(
-            onTap: () => context.model<HomeViewModel>().getProducts(),
-            title: "Get Product",
+        if (items.item1 == null) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CommonButton(
+                onTap: () => context.model<HomeViewModel>().getProducts(),
+                title: "Get Product",
+              ),
+              const SizedBox(height: 10),
+              CommonButton(
+                onTap: () => context.model<HomeViewModel>().noProduct(),
+                title: "When Product Empty",
+              ),
+            ],
           );
         }
-        return ListView.builder(
-          itemBuilder: (ctx, position) => ItemView(
-            productDto: items.item1[position],
+        if (items.item1!.isEmpty) {
+          return Column(
+            children: [
+              const Center(
+                child: Text("No Product Found!"),
+              ),
+              const SizedBox(height: 10),
+              CommonButton(
+                onTap: () => context.model<HomeViewModel>().getProducts(),
+                title: "Get Product",
+              ),
+            ],
+          );
+        }
+        return Expanded(
+          child: ListView.separated(
+            itemCount: items.item1!.length,
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            separatorBuilder: (ctx, index) => const SizedBox(height: 10),
+            itemBuilder: (ctx, position) => ItemView(
+              productDto: items.item1![position],
+            ),
           ),
         );
       },

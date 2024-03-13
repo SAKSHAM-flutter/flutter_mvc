@@ -1,29 +1,29 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mvc_flutter/ui/themes/colors.dart';
+import 'package:flutter/material.dart';
 import 'package:mvc_flutter/ui/utils/base_class/view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadingIndicator extends StatelessWidget {
-  const LoadingIndicator({Key? key}) : super(key: key);
+  const LoadingIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.loadingIndicator,
+        color: Theme.of(context).primaryColorLight,
         borderRadius: BorderRadius.circular(8),
       ), // Dialog background
-      child: const CupertinoActivityIndicator(
-        color: AppColors.loadingBG,
+      child: CupertinoActivityIndicator(
+        color: Theme.of(context).primaryColor,
       ),
     );
   }
 }
 
 class LoadingIndicatorConsumer<V extends ViewModel> extends StatelessWidget {
-  const LoadingIndicatorConsumer({Key? key}) : super(key: key);
+  const LoadingIndicatorConsumer({super.key});
 
   @override
   Widget build(BuildContext context) {

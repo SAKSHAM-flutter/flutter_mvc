@@ -15,20 +15,37 @@ class ItemView extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
+      elevation: 5,
       child: SizedBox(
-        height: 240,
         width: context.width,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomImage(source: productDto.thumbnail, height: 180),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                child: Text(
-                  productDto.title,
-                  style: Poppins.medium().s12,
-                  maxLines: 2,
-                ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: CustomImage(
+                source: productDto.thumbnail,
+                height: 180,
+                width: context.width,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Name:- ${productDto.title}",
+                    style: Poppins.semiBold().s14,
+                    maxLines: 1,
+                  ),
+                  Text(
+                    productDto.description,
+                    textAlign: TextAlign.center,
+                    style: Poppins.semiBold().s14,
+                    maxLines: 2,
+                  ),
+                ],
               ),
             )
           ],

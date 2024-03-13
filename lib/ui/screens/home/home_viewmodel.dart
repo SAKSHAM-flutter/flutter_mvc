@@ -1,22 +1,58 @@
-import 'package:flutter/material.dart';
-import 'package:interview_task/data/local/shared_pref_helper.dart';
-import 'package:interview_task/data/remote/model/current_price.dart';
-import 'package:interview_task/data/remote/repo/home_repo.dart';
-import 'package:interview_task/ui/utils/base_class/view_model.dart';
+import 'package:mvc_flutter/data/remote/model/product_dto.dart';
+import 'package:mvc_flutter/data/remote/repo/home_repo.dart';
+import 'package:mvc_flutter/ui/utils/base_class/view_model.dart';
 
 class HomeViewModel extends ViewModel {
-  void getPrices() {
-    callApi(() async {
-      CurrentPrice responseDto = await HomeRepo.getCurrency();
-      Prefs.localData.set(responseDto.toJson());
-      getFromLocal();
-    });
+  bool _apiView = false;
+  List<ProductDto> _products = [];
+  int _counter = 0;
+
+  int get counter => _counter;
+
+  bool get apiView => _apiView;
+
+  List<ProductDto> get products => _products;
+
+  set counter(int value) {
+    _counter = value;
+    notifyListeners();
   }
 
-  void getFromLocal() {
-    String json = Prefs.localData.get();
-    CurrentPrice? responseDto = CurrentPrice.fromJson(json);
-    debugPrint("Get Local");
-    debugPrint(responseDto.toString());
+  set apiView(bool value) {
+    if (value != apiView) {
+      counter = 0;
+      products = [];
+    }
+    _apiView = value;
+    notifyListeners();
+  }
+
+  set products(List<ProductDto> value) {
+    _products = value;
+    notifyListeners();
+  }
+
+  void increment() {
+    counter = counter + 1;
+  }
+
+  void decrement() {
+    if (counter != 0) {
+      counter = counter - 1;
+    } else {
+      onError?.call("Counter Can't be less then zero");
+    }
+  }
+
+  void getProducts() {
+    if (isLoading) return;
+    callApi(() async {
+      final response = await HomeRepo.getProducts();
+      if (response.isSuccessful) {
+        products = response.data?.toList() ?? [];
+      } else {
+        onError?.call(response.message);
+      }
+    });
   }
 }

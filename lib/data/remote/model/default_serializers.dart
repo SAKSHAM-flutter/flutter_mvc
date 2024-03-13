@@ -1,17 +1,14 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:interview_task/data/remote/model/currency_dto.dart';
-import 'package:interview_task/data/remote/model/current_price.dart';
-import 'package:interview_task/data/remote/model/response_dto.dart';
-import 'package:interview_task/data/remote/model/time_dto.dart';
-
-import 'bpi.dart';
+import 'package:mvc_flutter/data/remote/model/product_dto.dart';
+import 'package:mvc_flutter/data/remote/model/response_dto.dart';
 
 part 'default_serializers.g.dart';
 
 @SerializersFor([
   ResponseDto,
-  CurrentPrice,
+  ProductDto,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

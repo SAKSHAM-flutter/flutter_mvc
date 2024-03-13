@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.interview.task.interview_task">
+    package="flutter.mvc.app">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="interview_task"
+        android:label="MVC-Flutter"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

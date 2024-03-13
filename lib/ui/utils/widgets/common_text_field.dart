@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:interview_task/ui/themes/colors.dart';
-import 'package:interview_task/ui/themes/typography.dart';
+import 'package:mvc_flutter/ui/themes/colors.dart';
+import 'package:mvc_flutter/ui/themes/typography.dart';
 
 class CommonField extends StatelessWidget {
   final TextEditingController controller;

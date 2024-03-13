@@ -1,11 +1,12 @@
-import 'package:interview_task/data/remote/endpoints.dart';
-import 'package:interview_task/data/remote/model/current_price.dart';
-import 'package:interview_task/data/remote/networking.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:mvc_flutter/data/remote/endpoints.dart';
+import 'package:mvc_flutter/data/remote/model/product_dto.dart';
+import 'package:mvc_flutter/data/remote/model/response_dto.dart';
+import 'package:mvc_flutter/data/remote/networking.dart';
 
 class HomeRepo {
-  static Future<CurrentPrice> getCurrency() async {
-    CurrentPrice responseDto =
-        await httpGet<CurrentPrice>(Endpoints.getCurrency, {});
-    return responseDto;
+  static Future<ResponseDto<BuiltList<ProductDto>?>> getProducts() async {
+    final response = await httpGetList<ProductDto>(Endpoints.getProduct, {});
+    return response;
   }
 }

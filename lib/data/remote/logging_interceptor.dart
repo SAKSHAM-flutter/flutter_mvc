@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
+
 import 'package:http_interceptor/http_interceptor.dart';
-import 'package:interview_task/data/utils/log_tags.dart';
+import 'package:mvc_flutter/data/utils/log_tags.dart';
 
 class LoggingInterceptor implements InterceptorContract {
   @override
@@ -12,7 +13,8 @@ class LoggingInterceptor implements InterceptorContract {
 
   @override
   Future<ResponseData> interceptResponse({required ResponseData data}) async {
-    developer.log('>>>----------->>>calling api ${data.url}', name: LogTags.apiCall);
+    developer.log('>>>----------->>>calling api ${data.url}',
+        name: LogTags.apiCall);
     developer.log('Headers:- ');
     developer.log(data.request?.headers.toString() ?? '');
     developer.log('Request body:- ', name: LogTags.apiCall);

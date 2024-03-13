@@ -1,4 +1,4 @@
-name: interview_task
+name: mvc_flutter
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -10,16 +10,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  built_value: ^8.3.3 # for handling json serialization and creating immutable objects
+  built_value: ^8.9.1 # for handling json serialization and creating immutable objects
   built_collection: ^5.1.1
-  http: ^0.13.4
-  intl: ^0.17.0
+  cupertino_icons: ^1.0.6
+  connectivity_plus: ^5.0.2
+  cached_network_image: ^3.3.1
   email_validator: ^2.1.17
-  fluttertoast: ^8.1.1
+  flutter_screenutil: ^5.9.0
   http_interceptor: ^1.0.2
-  provider: ^6.0.3
-  shared_preferences: ^2.0.15
-  cupertino_icons: ^1.0.2
+  http: ^0.13.3
+  provider: ^6.1.2
+  shared_preferences: ^2.2.2
+  shimmer: ^3.0.0
+  tuple: ^2.0.2
+
 
 dev_dependencies:
   flutter_test:
@@ -32,7 +36,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/icons/
+    - assets/error_png/
 
   fonts:
     - family: Poppins

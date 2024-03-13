@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class Font {
   var _textStyle = const TextStyle();
 
+  TextStyle get s30 => _textStyle.copyWith(fontSize: 30);
+
   TextStyle get s20 => _textStyle.copyWith(fontSize: 20);
 
   TextStyle get s18 => _textStyle.copyWith(fontSize: 18);

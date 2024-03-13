@@ -9,7 +9,7 @@ Repo For MVC Pattern In Flutter.
 Code Generation This project uses code generation using built_value for generating code related to
 json serialization/deserialization. The generated part files are put in .gitignore. So in order to
 generate those files run the following command:
-#flutter pub run build_runner build --delete-conflicting-outputs
+#dart run build_runner build --delete-conflicting-outputs
 
 #Api:- maintain these response on each scenario:-
 1.) ResponseCode key which is int type like:- 200,201,204;

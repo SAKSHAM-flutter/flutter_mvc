@@ -13,11 +13,12 @@ void main() async {
   NetworkConnection.networkStreaming();
   await Prefs.init();
   FlutterError.onError = ((error) {
-    log("Where is Error Founf ${error.stack}");
-    if (navigatorKey.currentContext != null) {
-      // Navigator.push(navigatorKey.currentContext!,
-      //     MaterialPageRoute(builder: (ctx) => const SomethingWrong()));
-    }
+    log("Error Stack ${error.stack}");
+    log("Error Context  ${error.context?.name}");
+    // if (navigatorKey.currentContext != null) {
+    //   Navigator.push(navigatorKey.currentContext!,
+    //       MaterialPageRoute(builder: (ctx) => const SomethingWrong()));
+    // }
   });
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (value) => runApp(

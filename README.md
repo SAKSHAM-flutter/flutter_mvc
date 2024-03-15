@@ -19,21 +19,20 @@ success or any error found;
 4.) ResponseBody key which is object type, contain all type of data in object when data is not available it can be null;
 Example:-
 (Api Success):- {
-“ResponseCode”:200,
-“ResponseMessage”: “logged in Successfully”,
-“Succeeded”:true,
-“ResponseBody”:{
-“id”:id123455,
-“name”: “User Name”
-“Profile”: “www.profile.xn--com-9o0a
-}
-}
+        “ResponseCode”:200,
+        “ResponseMessage”: “logged in Successfully”,
+        “Succeeded”:true,
+        “ResponseBody”:{
+            “id”:id123455,
+            “name”: “User Name”
+            “Profile”: “www.profile.xn--com-9o0a"
+            }
+        }   
 (Api Error):- {
-“ResponseCode”:201,
-“ResponseMessage”: “User And Password not matched”,
-“Succeeded”:false,
-“ResponseBody”:null
-}
-}
+        “ResponseCode”:201,
+        “ResponseMessage”: “User And Password not matched”,
+        “Succeeded”:false,
+        “ResponseBody”:null
+        }
 
 

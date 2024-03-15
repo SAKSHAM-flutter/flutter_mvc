@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   connectivity_plus: ^5.0.2
   cached_network_image: ^3.3.1
+  easy_localization: ^3.0.5
   email_validator: ^2.1.17
   flutter_screenutil: ^5.9.0
   http_interceptor: ^1.0.2
@@ -39,6 +40,7 @@ flutter:
 
   assets:
     - assets/error_png/
+    - assets/translation/
 
   fonts:
     - family: Poppins

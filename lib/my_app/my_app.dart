@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvc_flutter/data/utils/connectivity_status.dart';
@@ -49,6 +50,9 @@ class _MyAppState extends State<MyApp> {
             initialRoute: SplashScreen.route,
             debugShowCheckedModeBanner: false,
             routes: RouteHelper.createRoutes(),
+            locale: context.locale,
+            supportedLocales: context.supportedLocales,
+            localizationsDelegates: context.localizationDelegates,
             scrollBehavior: const ScrollBehaviorModified(),
             builder: (context, widget) {
               return MediaQuery.withNoTextScaling(

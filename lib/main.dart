@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mvc_flutter/data/local/local_storage.dart';
@@ -23,8 +23,16 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (value) => runApp(
       MultiProvider(
-          providers: [ChangeNotifierProvider(create: (_) => ThemeNotifier())],
-          child: const MyApp()),
+        providers: [ChangeNotifierProvider(create: (_) => ThemeNotifier())],
+        child: EasyLocalization(
+          supportedLocales: const [Locale('en')],
+          path: 'assets/translation',
+          useOnlyLangCode: true,
+          fallbackLocale: const Locale('en'),
+          startLocale: const Locale('en'),
+          child: const MyApp(),
+        ),
+      ),
     ),
   );
 }

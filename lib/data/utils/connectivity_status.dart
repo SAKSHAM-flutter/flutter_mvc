@@ -7,31 +7,34 @@ import 'package:flutter/material.dart';
 import 'package:mvc_flutter/data/utils/log_tags.dart';
 import 'package:mvc_flutter/my_app/my_app.dart';
 import 'package:mvc_flutter/ui/utils/base_class/inetrnet_connection_interupt.dart';
+import 'package:mvc_flutter/ui/utils/base_class/toasts.dart';
 
 class NetworkConnection {
-  NetworkConnection._();
-
+  static final Queue<Function> _functionQueue = Queue();
   static late StreamSubscription streamSubscription;
   static ValueNotifier<bool> isNetworkAvailable = ValueNotifier(false);
   static bool isAvailable = false;
 
   static void networkStreaming() {
     streamSubscription = Connectivity().onConnectivityChanged.listen((event) {
-      BuildContext? context = navigatorKey.currentContext;
+      // BuildContext? context = navigatorKey.currentContext;
       if (event == ConnectivityResult.none) {
-        isNetworkAvailable.value = false;
         isAvailable = false;
-        if (context != null) {
-          Navigator.pushNamed(context, InternetConnection.route);
-        }
+        isNetworkAvailable.value = false;
+        errorToast("Internet Not Connected!");
+        // if (context != null) {
+        //   Navigator.pushNamed(context, InternetConnection.route);
+        // }
       } else {
-        isNetworkAvailable.value = true;
         isAvailable = true;
-        if (context != null) {
-          if (Navigator.canPop(context)) {
-            Navigator.pop(context);
-          }
-        }
+        isNetworkAvailable.value = true;
+        _executeQueuedFunctions();
+        successToast("Internet Connection Restored!");
+        // if (context != null) {
+        //   if (Navigator.canPop(context)) {
+        //     Navigator.pop(context);
+        //   }
+        // }
       }
       log(
         "Network Changed: isNetworkOn- $isAvailable Type ${event.name}",
@@ -48,29 +51,25 @@ class NetworkConnection {
       }
     }
   }
-}
 
-mixin InternetConnectionQueue {
-   final Queue<Function> _functionQueue = Queue();
-
-   void addToQueue(Function function) {
+  static void addToQueue(Function function) {
     if (!_functionQueue.contains(function)) {
       _functionQueue.add(function);
     }
     log("addToQueue working", name: LogTags.internetQueue);
     if (_functionQueue.length == 1) {
-      executeQueuedFunctions();
+      _executeQueuedFunctions();
     }
   }
 
-   Future<void> executeQueuedFunctions() async {
+  static Future<void> _executeQueuedFunctions() async {
     log(
       "Checking Function In Pending ${_functionQueue.length}",
       name: LogTags.internetQueue,
     );
-    if (NetworkConnection.isNetworkAvailable.value) {
+    if (NetworkConnection.isAvailable) {
       while (_functionQueue.isNotEmpty) {
-        final function = _functionQueue.first;
+        final function =  _functionQueue.first;
         try {
           await function();
           log("executeQueuedFunctions working", name: LogTags.internetQueue);

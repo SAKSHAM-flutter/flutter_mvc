@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 ///Use of this class is helpful while using classes such as
 ///[LoadingIndicatorConsumer], [CommonButtonLoading], [ScreenBase]
 ///All of the above mentioned classes take generic parameters
-class ViewModel extends ChangeNotifier with InternetConnectionQueue {
+class ViewModel extends ChangeNotifier  {
   bool _isLoading = false;
 
   set isLoading(value) {
@@ -31,17 +31,17 @@ class ViewModel extends ChangeNotifier with InternetConnectionQueue {
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         onError?.call(ValidationConstant.serverErrorMessage);
       } else {
-        addToQueue(api);
+        NetworkConnection.addToQueue(api);
         onError?.call(ValidationConstant.internetErrorMessage);
       }
     } on SocketException catch (_) {
-      addToQueue(api);
+      NetworkConnection.addToQueue(api);
       onError?.call(ValidationConstant.internetErrorMessage);
     }
   }
 
   void callApi(AsyncCallback api, {ValueChanged<String>? catchError}) {
-    if (NetworkConnection.isNetworkAvailable.value) {
+    if (NetworkConnection.isAvailable) {
       isLoading = true;
       api().then((_) {
         isLoading = false;
@@ -68,10 +68,10 @@ class ViewModel extends ChangeNotifier with InternetConnectionQueue {
         developer.log('Stack Trace: $stackTrace');
       });
     } else {
+      NetworkConnection.addToQueue(api);
       if (catchError != null) {
         catchError.call(ValidationConstant.internetErrorMessage);
       } else {
-        addToQueue(api);
         onError?.call(ValidationConstant.internetErrorMessage);
       }
     }

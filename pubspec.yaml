@@ -17,6 +17,7 @@ dependencies:
   cached_network_image: ^3.3.1
   easy_localization: ^3.0.5
   email_validator: ^2.1.17
+  flutter_local_notifications: ^17.0.0
   flutter_screenutil: ^5.9.0
   http_interceptor: ^1.0.2
   http: ^0.13.3
@@ -25,8 +26,9 @@ dependencies:
   shimmer: ^3.0.0
   tuple: ^2.0.2
 
-  #Firebase Projects
-  firebase_core:
+  #Firebase Pub
+  firebase_core: ^2.27.1
+  firebase_messaging: ^14.7.20
 
 dev_dependencies:
   flutter_test:
